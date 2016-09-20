@@ -1,0 +1,1 @@
+json.array! @vitolas, partial: 'vitolas/vitola', as: :vitola

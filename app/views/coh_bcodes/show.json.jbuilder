@@ -1,0 +1,1 @@
+json.partial! "coh_bcodes/coh_bcode", coh_bcode: @coh_bcode

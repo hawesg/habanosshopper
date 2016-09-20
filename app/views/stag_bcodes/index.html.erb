@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stag Bcodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stagid</th>
+      <th>Name</th>
+      <th>Bcode</th>
+      <th>Stag price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stag_bcodes.each do |stag_bcode| %>
+      <tr>
+        <td><%= stag_bcode.stagID %></td>
+        <td><%= stag_bcode.name %></td>
+        <td><%= stag_bcode.bcode %></td>
+        <td><%= stag_bcode.stag_price %></td>
+        <td><%= link_to 'Show', stag_bcode %></td>
+        <td><%= link_to 'Edit', edit_stag_bcode_path(stag_bcode) %></td>
+        <td><%= link_to 'Destroy', stag_bcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stag Bcode', new_stag_bcode_path %>

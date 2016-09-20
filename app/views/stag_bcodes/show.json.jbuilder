@@ -1,0 +1,1 @@
+json.partial! "stag_bcodes/stag_bcode", stag_bcode: @stag_bcode

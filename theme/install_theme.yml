@@ -1,0 +1,9 @@
+---
+content_path: "#body:text"
+partials:
+  menu: "#main-menu"
+index_path: index.html
+stylesheet_dir: css
+image_dir: images
+javascript_dir: js
+no_sass: false

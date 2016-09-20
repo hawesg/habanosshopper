@@ -1,0 +1,47 @@
+<%= form_for(package) do |f| %>
+  <% if package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(package.errors.count, "error") %> prohibited this package from being saved:</h2>
+
+      <ul>
+      <% package.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bsize %>
+    <%= f.number_field :bsize %>
+  </div>
+
+  <div class="field">
+    <%= f.label :multiplier %>
+    <%= f.number_field :multiplier %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type %>
+    <%= f.text_field :type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tubo %>
+    <%= f.check_box :tubo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vitola_id %>
+    <%= f.text_field :vitola_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

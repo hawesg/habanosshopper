@@ -1,0 +1,215 @@
+<p>You are using named yields. Here are examples how to use them:</p>
+<% content_for :head do -%>
+  <script></script>
+<% end -%>
+<% content_for :menu do -%>
+  <nav class="nav-primary hidden-xs" id="main-menu">
+              <div class="text-muted text-sm hidden-nav-xs padder m-t-sm m-b-sm">Start</div>
+              <ul class="nav nav-main" data-ride="collapse">
+                <li class="active">
+                  <a href="index.html" class="auto">
+                    <i class="i i-statistics icon">
+                    </i>
+                    <span class="font-bold">Price Comparison</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="i i-circle-sm-o text"></i>
+                      <i class="i i-circle-sm text-active"></i>
+                    </span>
+                    <b class="badge bg-danger pull-right">4</b>
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    <span class="font-bold">Specials</span>
+                  </a>
+					   <ul class="nav dk">
+                    <li>
+                      <a href="specials_coh.html" class="auto">
+                        <i class="i i-dot"></i>
+
+                        <span>Cigars Of Habanos</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="specials_ihavanas.html" class="auto">
+                        <i class="i i-dot"></i>
+
+                        <span>iHavanas</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="i i-circle-sm-o text"></i>
+                      <i class="i i-circle-sm text-active"></i>
+                    </span>
+                    <i class="fa fa-calendar-o"></i>
+                    
+                    <span class="font-bold">Box Codes</span>
+                  </a>
+                  <ul class="nav dk">
+                    <li>
+                      <a href="boxcodes_coh.html" class="auto">
+	                        <b class="badge bg-primary pull-right">878</b>
+                        <i class="i i-dot"></i>
+                        <span>Cigars Of Habanos</span>
+                      </a>
+                    </li>
+						<li>
+                      <a href="boxcodes_stag.html" class="auto">
+	                        <b class="badge bg-primary pull-right">181</b>
+                        <i class="i i-dot"></i>
+                        <span>Lewis Stagnetto Ltd.</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="i i-circle-sm-o text"></i>
+                      <i class="i i-circle-sm text-active"></i>
+                    </span>
+                   	<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <span class="font-bold">Vendors</span>
+                  </a>
+                  <ul class="nav dk">
+                    <li>
+                      <a href="vendors_coh.html" class="auto">
+                        <i class="i i-dot"></i>
+
+                        <span>Cigars Of Habanos</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="vendors_ihavanas.html" class="auto">
+                        <i class="i i-dot"></i>
+
+                        <span>iHavanas</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#" class="auto">
+                    <span class="pull-right text-muted">
+                      <i class="i i-circle-sm-o text"></i>
+                      <i class="i i-circle-sm text-active"></i>
+                    </span>
+                    <i class="i i-grid2 icon">
+                    </i>
+                    <span class="font-bold">Apps</span>
+                  </a>
+                  <ul class="nav dk">
+                    <li>
+                      <a href="mail.html" class="auto">
+                        <b class="badge bg-success lt pull-right">2</b>
+                        <i class="i i-dot"></i>
+
+                        <span>Mailbox</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="fullcalendar.html" class="auto">
+                        <i class="i i-dot"></i>
+
+                        <span>Calendar</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="project.html" class="auto">
+                        <i class="i i-dot"></i>
+
+                        <span>Project</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="media.html" class="auto">
+                        <i class="i i-dot"></i>
+
+                        <span>Media</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <div class="line dk hidden-nav-xs"></div>
+              <div class="text-muted text-xs hidden-nav-xs padder m-t-sm m-b-sm">Marcas</div>
+              <ul class="nav">
+                <li>
+                  <a href="mail.html#work">
+                    <i class="i i-circle-sm text-info-dk"></i>
+                    <span>Bolivar</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="mail.html#social">
+                    <i class="i i-circle-sm text-success-dk"></i>
+                    <span>Cohiba</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="mail.html#projects">
+                    <i class="i i-circle-sm text-danger-dk"></i>
+                    <span>Projects</span>
+                  </a>
+                </li>
+              </ul>
+              <div class="text-muted text-xs hidden-nav-xs padder m-t-sm m-b-sm">Circles</div>
+              <ul class="nav">
+                <li>
+                  <a href="#">
+                    <i class="i i-circle-sm-o text-success-lt"></i>
+                    <span>College</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="i i-circle-sm-o text-warning"></i>
+                    <span>Social</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+<% end -%>
+
+
+
+<!-- original body content -->
+              <div class="m-b-md">
+              </div>
+              <section class="panel panel-default">
+                <header class="panel-heading">
+                  Price Comparison
+                </header>
+                <div class="table-responsive">
+                  <table id="price-comparison" class="table m-b-none" data-ride="datatables">
+                    <thead>
+                      <tr>
+						<th rowspan="2">Marca</th>
+						<th rowspan="2">Vitola</th>
+						<th rowspan="2">Length</th>
+						<th rowspan="2">Ring Guage</th>
+						<th rowspan="2">Count</th>
+						<th colspan="2">Cigars of Habanos</th>
+						<th colspan="2">iHavana</th>
+						<th colspan="2">Stagnetto</th>
+                      </tr>
+					  <tr>
+						<th>Price</th>
+						<th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
+						<th>Price</th>
+						<th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
+						<th>Price</th>
+						<th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
+					  </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            

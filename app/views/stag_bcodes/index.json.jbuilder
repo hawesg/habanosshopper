@@ -1,0 +1,1 @@
+json.array! @stag_bcodes, partial: 'stag_bcodes/stag_bcode', as: :stag_bcode

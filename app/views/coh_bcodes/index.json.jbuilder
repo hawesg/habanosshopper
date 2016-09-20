@@ -1,0 +1,1 @@
+json.array! @coh_bcodes, partial: 'coh_bcodes/coh_bcode', as: :coh_bcode

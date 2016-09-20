@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Coh Prices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Package</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coh_prices.each do |coh_price| %>
+      <tr>
+        <td><%= coh_price.name %></td>
+        <td><%= coh_price.price %></td>
+        <td><%= coh_price.package %></td>
+        <td><%= link_to 'Show', coh_price %></td>
+        <td><%= link_to 'Edit', edit_coh_price_path(coh_price) %></td>
+        <td><%= link_to 'Destroy', coh_price, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coh Price', new_coh_price_path %>

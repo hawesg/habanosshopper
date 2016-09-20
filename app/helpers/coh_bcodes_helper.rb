@@ -1,0 +1,2 @@
+module CohBcodesHelper
+end

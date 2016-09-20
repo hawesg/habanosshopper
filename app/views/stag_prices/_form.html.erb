@@ -1,0 +1,37 @@
+<%= form_for(stag_price) do |f| %>
+  <% if stag_price.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stag_price.errors.count, "error") %> prohibited this stag_price from being saved:</h2>
+
+      <ul>
+      <% stag_price.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stagID %>
+    <%= f.text_field :stagID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :package_id %>
+    <%= f.text_field :package_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

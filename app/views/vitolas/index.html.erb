@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vitolas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Marca</th>
+      <th>Vitola</th>
+      <th>Length</th>
+      <th>Rg</th>
+      <th>Releasetype</th>
+      <th>Year</th>
+      <th>Region</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vitolas.each do |vitola| %>
+      <tr>
+        <td><%= vitola.marca %></td>
+        <td><%= vitola.vitola %></td>
+        <td><%= vitola.length %></td>
+        <td><%= vitola.rg %></td>
+        <td><%= vitola.releaseType %></td>
+        <td><%= vitola.year %></td>
+        <td><%= vitola.region %></td>
+        <td><%= link_to 'Show', vitola %></td>
+        <td><%= link_to 'Edit', edit_vitola_path(vitola) %></td>
+        <td><%= link_to 'Destroy', vitola, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vitola', new_vitola_path %>

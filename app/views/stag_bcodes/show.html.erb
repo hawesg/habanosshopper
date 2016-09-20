@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stagid:</strong>
+  <%= @stag_bcode.stagID %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stag_bcode.name %>
+</p>
+
+<p>
+  <strong>Bcode:</strong>
+  <%= @stag_bcode.bcode %>
+</p>
+
+<p>
+  <strong>Stag price:</strong>
+  <%= @stag_bcode.stag_price %>
+</p>
+
+<%= link_to 'Edit', edit_stag_bcode_path(@stag_bcode) %> |
+<%= link_to 'Back', stag_bcodes_path %>

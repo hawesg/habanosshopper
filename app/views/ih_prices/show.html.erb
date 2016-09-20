@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ih_price.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @ih_price.price %>
+</p>
+
+<p>
+  <strong>Package:</strong>
+  <%= @ih_price.package %>
+</p>
+
+<%= link_to 'Edit', edit_ih_price_path(@ih_price) %> |
+<%= link_to 'Back', ih_prices_path %>

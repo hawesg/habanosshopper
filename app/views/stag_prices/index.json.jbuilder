@@ -1,0 +1,1 @@
+json.array! @stag_prices, partial: 'stag_prices/stag_price', as: :stag_price

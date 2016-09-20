@@ -1,0 +1,1 @@
+json.array! @ih_prices, partial: 'ih_prices/ih_price', as: :ih_price

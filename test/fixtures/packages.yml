@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  bsize: 1
+  multiplier: 1
+  type: 
+  tubo: false
+  vitola: one
+
+two:
+  name: MyString
+  bsize: 1
+  multiplier: 1
+  type: 
+  tubo: false
+  vitola: two

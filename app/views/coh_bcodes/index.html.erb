@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Coh Bcodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bcode</th>
+      <th>Coh price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coh_bcodes.each do |coh_bcode| %>
+      <tr>
+        <td><%= coh_bcode.name %></td>
+        <td><%= coh_bcode.bcode %></td>
+        <td><%= coh_bcode.coh_price %></td>
+        <td><%= link_to 'Show', coh_bcode %></td>
+        <td><%= link_to 'Edit', edit_coh_bcode_path(coh_bcode) %></td>
+        <td><%= link_to 'Destroy', coh_bcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coh Bcode', new_coh_bcode_path %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Marca:</strong>
+  <%= @vitola.marca %>
+</p>
+
+<p>
+  <strong>Vitola:</strong>
+  <%= @vitola.vitola %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @vitola.length %>
+</p>
+
+<p>
+  <strong>Rg:</strong>
+  <%= @vitola.rg %>
+</p>
+
+<p>
+  <strong>Releasetype:</strong>
+  <%= @vitola.releaseType %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @vitola.year %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @vitola.region %>
+</p>
+
+<%= link_to 'Edit', edit_vitola_path(@vitola) %> |
+<%= link_to 'Back', vitolas_path %>

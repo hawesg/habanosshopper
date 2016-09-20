@@ -1,0 +1,62 @@
+<div class="m-b-md">
+  <h3 class="m-b-none">All Vendors</h3>
+</div>
+ <section class="panel panel-primary">
+    <header class="panel-heading">
+      Compare Prices 
+      <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i> 
+    </header>
+    <div class="table-responsive">
+ <table id="vendors" class="table m-b-none" data-ride="datatables" cellspacing="0" width="98%">
+  <thead>
+    <tr>
+		<th rowspan="2"><i class="vs vs-smoking-alt"></i></th>
+		<th rowspan="2">Box Type</th>
+		<th rowspan="2">Length</th>
+		<th rowspan="2">Ring Gauge</th>
+		<th rowspan="2">Count</th>
+		<th colspan="2">Cigars of Habanos</th>
+		<th colspan="2">iHavana</th>
+		<th colspan="2">Stagnetto</th>
+    </tr>
+	  <tr>
+		<th>Price</th>
+		<th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
+		<th>Price</th>
+		<th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
+		<th>Price</th>
+		<th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
+	  </tr>
+  </thead>
+  <tbody>
+    <% @packages.each do |package| %>
+      <tr>
+        <td><%= package.marca.titleize %> <i class="fa fa-minus"></i> <a href="#"> <%= package.size.titleize %></a> </td>
+        <td><span class="label label-info"><%= human_readable_box_type(package.package_type) %></span></td>
+        <td><%= package.inch %>"</td>
+        <td><%= package.ring_guage %> <small>rg</small></td>
+        <td><%= package.bsize %> <% if package.bcount > 1 %> <i class="fa fa-times"></i> <%= package.bcount %> <% end %> <% if package.multiplier > 1 %> <i class="fa fa-times"></i> <%= package.multiplier %> <% end %></td>
+      <% if package.coh_price %>
+		<td <% if package.coh_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.coh_price.usd %></td>
+        <td <% if package.coh_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.coh_price.cost_per_cigar %></td>
+     <% else %>
+  		<td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td> <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
+     <% end %>
+     <% if package.ih_price %>
+        <td <% if package.ih_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.ih_price.usd %></td>
+        <td <% if package.ih_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.ih_price.cost_per_cigar %></td>
+     <% else %>
+     	<td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td> <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
+     <% end %>
+     <% if package.stag_price %>
+        <td <% if package.stag_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.stag_price.usd %></td>
+        <td <% if package.stag_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.stag_price.cost_per_cigar %></td>
+     <% else %>
+  		<td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td> <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
+     <% end %>
+      </tr>
+    <% end %>
+   </tbody>
+</table>
+ </div>
+  </section>

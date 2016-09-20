@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @coh_price.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @coh_price.price %>
+</p>
+
+<p>
+  <strong>Package:</strong>
+  <%= @coh_price.package %>
+</p>
+
+<%= link_to 'Edit', edit_coh_price_path(@coh_price) %> |
+<%= link_to 'Back', coh_prices_path %>

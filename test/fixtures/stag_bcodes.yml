@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stagID: MyString
+  name: MyString
+  bcode: MyString
+  stag_price: one
+
+two:
+  stagID: MyString
+  name: MyString
+  bcode: MyString
+  stag_price: two

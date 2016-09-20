@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  marca: MyString
+  vitola: MyString
+  length: 
+  rg: 
+  releaseType: MyString
+  year: 
+  region: MyString
+
+two:
+  marca: MyString
+  vitola: MyString
+  length: 
+  rg: 
+  releaseType: MyString
+  year: 
+  region: MyString

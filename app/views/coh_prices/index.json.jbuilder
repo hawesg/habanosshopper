@@ -1,0 +1,1 @@
+json.array! @coh_prices, partial: 'coh_prices/coh_price', as: :coh_price

@@ -1,0 +1,123 @@
+<nav class="nav-primary hidden-xs" id="main-menu">
+   <div class="text-muted text-sm hidden-nav-xs padder m-t-sm m-b-sm">Start</div>
+   <ul class="nav nav-main" data-ride="collapse">
+      <li <% if controller_name == 'home' && action_name == 'index' %>class="active"<%end%>>
+        <%= link_to root_path, :title => "Home" do %>
+		 	<i class="i i-home icon"></i>
+              <span class="font-bold">Home</span>
+		<% end %>  
+      </li>
+      <li>
+         <a  class="auto">
+         <span class="pull-right text-muted">
+         <i class="i i-circle-sm-o text"></i>
+         <i class="i i-circle-sm text-active"></i>
+         </span>
+         <b class="badge bg-danger pull-right">0</b>
+         <i class="fa fa-money" aria-hidden="true"></i>
+         <span class="font-bold">Specials</span>
+       </a>
+      </li>
+      <li <% if controller_name == 'boxcodes' %>class="active"<%end%>>
+         <a href="#" class="auto">
+         <span class="pull-right text-muted">
+         <i class="i i-circle-sm-o text"></i>
+         <i class="i i-circle-sm text-active"></i>
+         </span>
+         <i class="fa fa-calendar-o"></i>
+         <span class="font-bold">Box Codes</span>
+         </a>
+         <ul class="nav dk">
+	        <li <% if controller_name == 'boxcodes' && action_name == 'coh' %>class="active"<%end%>>
+		      <%= link_to boxcodes_coh_path, :title => "Cigars of Habanos" do %>
+			     <i class="i i-dot"></i>
+			     <b class="badge bg-primary pull-right"><%= CohBcode.all.count %></b>
+	             <span>Cigars of Habanos</span>
+			  <% end %>
+		    </li>
+	        <li <% if controller_name == 'boxcodes' && action_name == 'stagnetto' %>class="active"<%end%>>
+		      <%= link_to boxcodes_stagnetto_path, :title => "Lewis Stagnetto Ltd." do %>
+			     <i class="i i-dot"></i>
+			     <b class="badge bg-primary pull-right"><%= StagBcode.all.count %></b>
+	             <span>Lewis Stagnetto Ltd.</span>
+			  <% end %>
+		    </li>
+         </ul>
+      </li>
+      <li <% if controller_name == 'vendors' %>class="active"<%end%>>
+         <a href="#" class="auto">
+         <span class="pull-right text-muted">
+         <i class="i i-circle-sm-o text"></i>
+         <i class="i i-circle-sm text-active"></i>
+         </span>
+         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+         <span class="font-bold">Vendors</span>
+         </a>
+         <ul class="nav dk">
+	        <li <% if controller_name == 'vendors' && action_name == 'index' %>class="active"<%end%>>
+		      <%= link_to vendors_path, :title => "Compare Prices" do %>
+			     <i class="i i-dot"></i>
+	             <span>Compare Prices</span>
+			  <% end %>
+		    </li>
+	        <li <% if controller_name == 'vendors' && action_name == 'coh' %>class="active"<%end%>>
+		      <%= link_to vendors_coh_path, :title => "Cigars Of Habanos" do %>
+			     <i class="i i-dot"></i>
+	             <span>Cigars Of Habanos</span>
+			  <% end %>
+		    </li>
+	        <li <% if controller_name == 'vendors' && action_name == 'ihavana' %>class="active"<%end%>>
+		      <%= link_to vendors_ihavana_path, :title => "iHavana" do %>
+			     <i class="i i-dot"></i>
+	             <span>iHavana</span>
+			  <% end %>
+		    </li>
+	        <li <% if controller_name == 'vendors' && action_name == 'stagnetto' %>class="active"<%end%>>
+		      <%= link_to vendors_stagnetto_path, :title => "Lewis Stagnetto Ltd." do %>
+			     <i class="i i-dot"></i>
+	             <span>Lewis Stagnetto Ltd.</span>
+			  <% end %>
+		    </li>
+         </ul>
+      </li>
+      <li>
+         <a href="#" class="auto">
+         <span class="pull-right text-muted">
+         <i class="i i-circle-sm-o text"></i>
+         <i class="i i-circle-sm text-active"></i>
+         </span>
+         <i class="i i-grid2 icon">
+         </i>
+         <span class="font-bold">Apps</span>
+         </a>
+         <ul class="nav dk">
+            <li>
+               <a href="mail.html" class="auto">
+               <b class="badge bg-success lt pull-right">2</b>
+               <i class="i i-dot"></i>
+               <span>Mailbox</span>
+               </a>
+            </li>
+            <li>
+               <a href="fullcalendar.html" class="auto">
+               <i class="i i-dot"></i>
+               <span>Calendar</span>
+               </a>
+            </li>
+            <li>
+               <a href="project.html" class="auto">
+               <i class="i i-dot"></i>
+               <span>Project</span>
+               </a>
+            </li>
+            <li>
+               <a href="media.html" class="auto">
+               <i class="i i-dot"></i>
+               <span>Media</span>
+               </a>
+            </li>
+         </ul>
+      </li>
+   </ul>
+   <div class="line dk hidden-nav-xs"></div>
+</nav>

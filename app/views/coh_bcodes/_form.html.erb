@@ -1,0 +1,32 @@
+<%= form_for(coh_bcode) do |f| %>
+  <% if coh_bcode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(coh_bcode.errors.count, "error") %> prohibited this coh_bcode from being saved:</h2>
+
+      <ul>
+      <% coh_bcode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bcode %>
+    <%= f.text_field :bcode %>
+  </div>
+
+  <div class="field">
+    <%= f.label :coh_price_id %>
+    <%= f.text_field :coh_price_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

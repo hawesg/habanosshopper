@@ -1,0 +1,392 @@
+<!!DOCTYPE html>>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="styles/jquery.mobile-1.0b2.min.css" />
+	<link rel="stylesheet" href="styles/eth.css" />
+	<script src="styles/jquery-1.6.4.min.js" type="text/javascript"></script> 
+	<script src="styles/jquery.mobile-1.0b2.min.js?2" type="text/javascript"></script> 
+	<script src="styles/RGraph.common.core.js" type="text/javascript"></script> 
+	<script src="styles/RGraph.common.dynamic.js" type="text/javascript"></script> 
+	<script src="styles/RGraph.common.tooltips.js" type="text/javascript"></script> 
+	<script src="styles/RGraph.common.key.js" type="text/javascript"></script> 
+    <script src="styles/RGraph.line.js" type="text/javascript"></script> 
+
+			<script type="text/javascript" src="styles/jquery.mobile.simpledialog.min.js?1"></script> 
+	<link rel="stylesheet" type="text/css" href="styles/jquery.mobile.simpledialog.min.css" />
+
+</head>
+<body>
+	<div data-role="page" id="tempStatTopPage" data-title="Temperature Statistics - Wireless Tag List">
+
+		<div data-role="header" data-theme="b" data-position="inline">
+			<a href="index.html" data-icon="delete" data-iconpos="notext" data-ajax="false">Cancel</a>
+			<h1 id="stat_title">Temperature Statistics</h1>
+			<a class="ui-btn-right" id="top_right_btn" data-icon="arrow-u" data-ajax=0 data-theme="b">Share</a>
+		</div>
+		<div id="tempStatGraphs" style="margin-left:2%; margin-right: 2%;">
+		</div>
+		<center class="loggedInOnly">
+			<button data-icon="arrow-d" data-inline=1 data-theme="b" id="downloadLogBtn">Download CSV</button>
+		</center>
+		<center class="sharedOnly">
+			...captured by <a href="http://wirelesstag.net">Wireless Sensor Tags</a>
+		</center>
+
+		<script src="styles/client.js" type="text/javascript"></script> 
+		<script type="text/javascript">
+			var slaveIds, statType;
+			if(window.location.search.length > 0 ){
+				var params = window.location.search.substring(1).split('&');
+				slaveIds = params[0].split(':');
+				statType = params.length>1 ? params[1] : "temperature";
+			}
+			else{
+				slaveIds = localStorage["mytaglist.stats.slaveids"].split(':');
+				statType = localStorage["mytaglist.stats.type"] || "temperature";
+			}
+
+			function previewEmbedHTML2() {
+				$.ajax({
+					url: WSROOT + "ethLogs.asmx/EditSharePermissions",
+					data: JSON.stringify({
+						"ids": slaveIds,
+						"shareTemperature": shareInfo.shareTemperature.map(function () { return $("#shareTemp").is(":checked"); }),
+						"shareMotion": shareInfo.shareMotion.map(function () { return $("#shareMotion").is(":checked"); })
+					}),
+					success: function () {
+						$("#embdedHTMLPreview").html($("#embedHTML").val());
+					},
+					error: function (xhr, textStatus, exception) {
+						popup_error(xhr, null);
+					}
+				});
+			}
+
+			var isUUID = slaveIds[0].length > 4;
+			var shareInfo;
+			if (isUUID) {
+				$(".loggedInOnly").hide();
+				$(".sharedOnly").show();
+
+				var btn = $("#top_right_btn");
+				btn.data("icon", "arrow-d");
+				btn[0].innerHTML = "Download";
+				btn.click(function () {
+					window.location = WSROOT + "ethDownloadMultiStatsCSV.aspx?uuids=" + slaveIds.join(":") + "&type=" + statType;
+				});
+			} else {
+				$(".sharedOnly").hide();
+				$("#downloadLogBtn").click(function () {
+					window.location = WSROOT + "ethDownloadMultiStatsCSV.aspx?ids=" + slaveIds.join(":") + "&type=" + statType;
+				});
+				$("#top_right_btn").click(function () {
+					var btn2 = $("#top_right_btn").find(".ui-btn-inner");
+					var oldhtml2 = show_finding(btn2, "Loading...");
+					$.ajax({
+						url: WSROOT + "ethLogs.asmx/GetSharePermissions",
+						data: JSON.stringify({ "ids": slaveIds, "type": statType }),
+						complete: function () { restore_finding(btn2, oldhtml2); },
+						success: function (retval, textStatus) {
+							shareInfo = retval.d;
+
+							var html = "<div style='padding: 15px; width: " + (window.innerWidth - 140) + "px'><b>Share this data</b>" +
+							"<div data-role='fieldcontain'><label for='graphURL'>Link to open graph in Web:</label><input type='text' id='graphURL'></div>"+
+							"<div data-role='fieldcontain'><label for='downloadURL'>CSV download link:</label><input type='text' id='downloadURL'></div>"+
+							"<div data-role='fieldcontain'><label for='iosURL'>Link to open graph in iOS app:</label><input type='text' id='iosURL'></div>"+
+							"<div data-role='fieldcontain'><label for='embedHTML'>HTML to embed latest readings:</label><input type='text' id='embedHTML'><button onclick='previewEmbedHTML2()' data-theme='d'>Preview HTML</button></div><div id='embdedHTMLPreview'></div>" +
+							"<fieldset data-role='controlgroup'><input type='checkbox' id='shareTemp'><label for='shareTemp'>Anyone with link can access temperature data for these tags</label>" +
+							"<input type='checkbox' id='shareMotion'><label for='shareMotion'>Anyone with link can access motion log data for these tags</label></fieldset>"+
+							"<a rel='close' data-role='button' data-theme='b' href='#'>Apply Permissions</a></div>";
+
+							var holder = $("#tempStatGraphs");
+							if (holder.data('simpledialog')) {
+								holder.data('simpledialog').options.fullHTML = html;
+								holder.simpledialog('refresh').simpledialog('open');
+							} else {
+								holder.simpledialog({
+									'mode': 'blank',
+									'left': 80, 'top': '0px',
+									'prompt': false,
+									'forceInput': false,
+									'useModal': true,
+									pickPageTheme: 'c',
+									'fullHTML': html,
+									onClosed: function () {
+										if (shareInfo.shareMotion.every(function (e) { return e; }) != $("#shareMotion").is(":checked") ||
+											shareInfo.shareTemperature.every(function (e) { return e; }) != $("#shareTemp").is(":checked")) {
+										
+											$.ajax({
+												url: WSROOT + "ethLogs.asmx/EditSharePermissions",
+												data: JSON.stringify({
+													"ids": slaveIds,
+													"shareTemperature": shareInfo.shareTemperature.map(function () { return $("#shareTemp").is(":checked"); }),
+													"shareMotion": shareInfo.shareMotion.map(function () { return $("#shareMotion").is(":checked"); })
+												}),
+												error: function (xhr, textStatus, exception) {
+													popup_error(xhr, null);
+												}
+											});
+										}
+									}
+								});
+							}
+
+							$("#shareMotion").attr("checked", shareInfo.shareMotion[0]).checkboxradio("refresh");
+							$("#shareTemp").attr("checked", shareInfo.shareTemperature[0]).checkboxradio("refresh");
+
+							$("#graphURL").val(shareInfo.graphUrl).click(function () { return selectedURL(this, statType == "motion"); });
+							$("#downloadURL").val(shareInfo.downloadUrl).click(function () { return selectedURL(this, statType == "motion"); });
+							$("#iosURL").val(shareInfo.iosAppUrl).click(function () { return selectedURL(this, statType == "motion"); });
+							$("#embedHTML").val(shareInfo.embedHTML).click(function () { return selectedURL(this, statType == "motion"); });
+
+						},
+						error: function (xhr, textStatus, exception) {
+							popup_error(xhr, null);
+						}
+					});
+				});
+			}
+
+
+
+			var statTypeTranslationLUT = { "temperature": 
+				{name:"Temperature",
+					tooltipGen: function (deg, i) {
+						if (temp_unit) degf = deg;
+						else degf = deg * 9.0 / 5.0 + 32.0;
+						return Math.round(degf * 10) / 10 + "Â°F/" + Math.round((degf - 32) * 5.0 / 9.0 * 10) / 10 + "Â°C";
+					}, 
+					unitGen: function () {return temp_unit ? 'Â°F' : 'Â°C'; }, 
+					preProcess: function (degC, i) { if (degC == 0.0) return NaN; return temp_unit == 1 ? degC * 9.0 / 5.0 + 32.0 : degC; },
+					ymaxInit: function () { return temp_unit == 1 ? -28 : -40;},
+					ymaxPost: function (ymax) { return Math.ceil(Math.min(temp_unit ? 220 : 125, ymax) / 5 + 0.5) * 5; },
+					yminInit: function () { return temp_unit == 1 ? 220 : 115;},
+					yminPost: function (ymin) { return Math.floor(ymin / 5 - 0.5) * 5; },
+					decimals: 0
+				},
+				"cap": 
+					{
+						name: "Moisture/RH",
+						tooltipGen: function (v, i) { return Math.round(v) + " %" },
+						unitGen: function () { return "%"; },
+						preProcess: function (val, i) { if (val == 0) return NaN; return val; },
+						ymaxInit: function () { return 0;},
+						ymaxPost: function (ymax) { return ymax;},
+						yminInit: function () { return 100;},
+						yminPost: function (ymin) { return ymin; },
+						decimals: 0
+					},
+				"batteryVolt": 
+					{
+						name: "Battery Voltage",
+						tooltipGen: function (v, i) { return Math.round(v * 100) / 100 + " volts" },
+						unitGen: function () { return "V"; },
+						preProcess: function (val, i) { if (val == 0) return NaN; return val; },
+						ymaxInit: function () { return 2.0; },
+						ymaxPost: function (ymax) { return ymax; },
+						yminInit: function () { return 3.5; },
+						yminPost: function (ymin) { return ymin; },
+						decimals: 2
+					},
+				"motion":
+					{
+						name: "Motion/Door",
+						tooltipGen: function (v, i) { return Math.round(v) + " times" },
+						unitGen: function () { return " times"; },
+						preProcess: function (val, i) { return val; },
+						ymaxInit: function () { return 0; },
+						ymaxPost: function (ymax) { return ymax; },
+						yminInit: function () { return 100; },
+						yminPost: function (ymin) { return ymin; },
+						decimals: 0,
+						total: 1
+					}
+
+			};
+			var statTypeTranslation = statTypeTranslationLUT[statType];
+			$("#stat_title").text(statTypeTranslation.name + " Statistics");
+
+			/*$("#download_temp_csv").click(function () {
+				window.location = "http://www.mytaglist.com/ethDownloadTempCSV.aspx?id=" + slaveIds.join(':') + "&type=" + statType;
+			});*/
+
+			Array.prototype.average = function () {
+				var n = 0;
+				for (var i = 0, sum = 0; i < this.length; i++) {
+					if (this[i]) {
+						sum += this[i]; n++;
+					}
+				}
+				return Math.round(sum * 10 / n) / 10;
+			}
+
+			Array.prototype.average2 = function () {
+				var ret = [];
+				for (var i = 0; i < this.length; i++) {
+					if (this[i].length) {
+						ret[i] = this[i].average();
+					}
+				}
+				return ret.join(",");
+			}
+			Array.prototype.sum2= function () {
+				var ret = [];
+				for (var i = 0; i < this.length; i++) {
+					if (this[i].length) {
+						ret[i] = this[i].sum();
+					}
+				}
+				return ret.join(",");
+			}
+
+			function applyToConstructor(constructor, argArray) {
+				var args = [null].concat(argArray);
+				var factoryFunction = constructor.bind.apply(constructor, args);
+				return new factoryFunction();
+			}
+
+			var temp_unit = 0; 
+			var isPrinting = false;
+			function createOneDayGraph(stat, ymax2, ymin2) {
+				var cvsid = "day_" + stat.date.replace(/\//g, '_');
+			
+				var targetWidth;
+				if (window.innerWidth > 1000) targetWidth = window.innerWidth / 2-15;
+				else targetWidth = window.innerWidth;
+
+				$("<canvas></canvas>").data('date', stat.date).attr("id", cvsid)
+							.attr("height", targetWidth / 2.5)
+				.attr("width", targetWidth * (isPrinting ? 1.18 : 0.95)).appendTo($("#tempStatGraphs"));
+
+				var line3 = applyToConstructor(RGraph.Line, [cvsid].concat(stat.values)); //new RGraph.Line(cvsid, stat.temps);
+				var merged = [];
+				line3.Set('chart.tooltips', $.map(merged.concat.apply(merged, stat.values), statTypeTranslation.tooltipGen));
+				line3.Set('chart.gutter.left', 40);
+				line3.Set('chart.gutter.right', 40);
+				line3.Set('chart.yaxispos', 'right');
+				line3.Set('chart.tooltips.event', 'onclick');
+
+				line3.Set('chart.background.grid', true);
+				line3.Set('chart.background.grid.autofit.numvlines', 23);
+				line3.Set('chart.units.post', statTypeTranslation.unitGen());
+
+				if (ymin2 < 0) {
+					line3.Set('chart.xaxispos', 'center');
+					line3.Set('chart.ymax', ymax2 + ymin2 > 0 ? ymax2 : -ymin2);
+				} else {
+					line3.Set('chart.ymax', ymax2);
+					line3.Set('chart.ymin', ymin2);
+					line3.Set('chart.xaxispos', 'bottom');
+				}
+				line3.Set('chart.scale.decimals', statTypeTranslation.decimals);
+				line3.Set('chart.colors', $.map(stat.ids, function (v) { return Id2Color[v]; }));
+				line3.Set('chart.key', $.map(stat.ids, function(v){return Id2Name[v];}));
+				line3.Set('chart.key.position.x', 45);
+				line3.Set('chart.key.position.y', 25);
+				line3.Set('chart.key.background', 'rgba(255,255,255,0.5)');
+				line3.Set('chart.labels', ['12AM', '', '', '3', '', '', '6AM', '', '', '9', '', '', '12PM', '', '', '3', '', '', '6PM', '', '', '9', '', '']);
+
+				if (statTypeTranslation.total)
+					line3.Set('chart.title', stat.date + " (Total: " + stat.values.sum2() + statTypeTranslation.unitGen() + ")");
+				else
+					line3.Set('chart.title', stat.date + " (Average: " + stat.values.average2() + statTypeTranslation.unitGen() + ")");
+			
+				line3.Draw();
+			}
+
+			var $loader = $("<div class='ui-loader ui-body-a ui-corner-all'><span class='ui-icon ui-icon-loading spin'></span><h1>Loading Statistics...</h1></div>");
+			$body = $("body");
+			$loader.appendTo($body).css({ top: 100 });
+			$body.addClass("ui-loading");
+
+			var statData = new Array();		// array per each day. value: {date: xxx , ids:[], values: [[24 elements], [24 elements]...] }
+			var Id2Name = {};
+			var Id2Color = {};
+			var ymin2 = new Array(), ymax2 = new Array();
+			function resizeCanvas() {
+				if ($.mobile.activePage[0].id == 'tempStatTopPage') {
+
+					$("canvas").remove();
+					for (var i = 0; i < statData.length; i++) {
+						createOneDayGraph(statData[i], ymax2[i], ymin2[i]);
+					}
+				}
+			}
+			var availableColors = ['red', 'yellow', 'green', 'blue', '#FF00FF', '#13919F', '#660F8B', '#848B0F', '#0F368B', '#D53366', '#151B8D', '#F778A1', '#F87431',
+				'#20E42D', '#F6A40C', '#4079CA', '#40CA93', '#DDE469', '#979F0F', '#C4522C', '#29BA7C', '#4B29BA', '#4A3A72', '#00FFFF', '#808000'];
+
+			function loadStats() {
+				var isUUID = slaveIds[0].length > 4;
+				$.ajax({
+					url: WSROOT + (isUUID? "ethLogShared.asmx/GetHourlyStatsByUUIDs":"ethLogs.asmx/GetHourlyStats"),
+					data: JSON.stringify({ "ids": slaveIds, "type":statType }),
+					success: function (retval, textStatus) {
+					
+						temp_unit = retval.d.temp_unit;
+						for (var i = 0; i < retval.d.ids.length; i++){
+							Id2Name[retval.d.ids[i]] = retval.d.names[i];
+							Id2Color[retval.d.ids[i]] = availableColors[i];
+						}
+						statData = retval.d.stats;
+						for (var i = 0; i < statData.length; i++) {
+							var statDay = statData[i];
+							ymax2[i] = statTypeTranslation.ymaxInit();
+							ymin2[i] = statTypeTranslation.yminInit();
+							for(var tagi =0;tagifor (var j = 0; j < statDay.values[tagi].length; j++) {
+									var degf = statDay.values[tagi][j];
+									if (isNaN(degf)) continue;
+									ymax2[i] = Math.max(degf, ymax2[i]);
+									ymin2[i] = Math.min(degf, ymin2[i]);
+								}
+							}
+							ymax2[i] = statTypeTranslation.ymaxPost(ymax2[i]);
+							ymin2[i] = statTypeTranslation.yminPost(ymin2[i]);
+						
+							createOneDayGraph(statDay, ymax2[i], ymin2[i]);
+						}
+
+						window.addEventListener('resize', function () {
+							resizeCanvas();
+						}, false);
+						window.matchMedia('print').addListener(function (mql) {
+							if (mql.matches) {
+								isPrinting = true;
+								resizeCanvas();
+							} else {
+								isPrinting = false;
+							}
+						});
+						$loader.remove();
+					},
+					error: function (xhr, textStatus, exception) {
+						if (xhr.responseText.toLowerCase().indexOf("unauthorized") != -1 || exception.toLowerCase().indexOf("unauthorized") != -1 || xhr.responseText.toLowerCase().indexOf("authentication failed") != -1)
+							location.replace("signin.html?redirect=tempStatsMulti.html");
+						else {
+
+							$loader.remove();
+
+							popup_error(xhr, $body);
+						}
+					}
+				});
+			}
+			if (params != null && params.length > 2) {
+				$.ajax({
+					url: WSROOT + "ethAccount.asmx/ReflectAspxAuthCookie",
+					data: JSON.stringify({ "cookie": params[2] }),
+					success: function (retval, textStatus) {
+						loadStats();
+					}
+				});
+			}
+			else {
+				loadStats();
+			}
+
+		</script> 
+	</div>
+
+</body>
+</html>

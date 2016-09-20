@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @coh_bcode.name %>
+</p>
+
+<p>
+  <strong>Bcode:</strong>
+  <%= @coh_bcode.bcode %>
+</p>
+
+<p>
+  <strong>Coh price:</strong>
+  <%= @coh_bcode.coh_price %>
+</p>
+
+<%= link_to 'Edit', edit_coh_bcode_path(@coh_bcode) %> |
+<%= link_to 'Back', coh_bcodes_path %>

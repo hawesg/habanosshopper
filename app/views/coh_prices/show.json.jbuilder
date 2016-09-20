@@ -1,0 +1,1 @@
+json.partial! "coh_prices/coh_price", coh_price: @coh_price

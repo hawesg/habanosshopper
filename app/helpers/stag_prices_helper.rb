@@ -1,0 +1,2 @@
+module StagPricesHelper
+end

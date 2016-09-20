@@ -1,0 +1,37 @@
+<%= form_for(stag_bcode) do |f| %>
+  <% if stag_bcode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stag_bcode.errors.count, "error") %> prohibited this stag_bcode from being saved:</h2>
+
+      <ul>
+      <% stag_bcode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :stagID %>
+    <%= f.text_field :stagID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bcode %>
+    <%= f.text_field :bcode %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stag_price_id %>
+    <%= f.text_field :stag_price_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
