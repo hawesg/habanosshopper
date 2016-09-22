@@ -44,6 +44,10 @@ gem "figaro"
 
 gem 'jquery-turbolinks', '~> 2.1'
 
+gem 'money-rails'
+#for money rails
+gem 'json'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

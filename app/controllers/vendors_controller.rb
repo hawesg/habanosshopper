@@ -10,9 +10,9 @@ class VendorsController < ApplicationController
   def stagnetto
     @stag_prices = Package.joins(:stag_price).includes(:stag_price, :vitola).all
   end
-  
+
   def compare
-    
+
   end
   def index
     @packages = Package.includes(:vitola, :coh_price, :ih_price, :stag_price).all

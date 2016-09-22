@@ -3,8 +3,12 @@ class Package < ApplicationRecord
   has_one :coh_price
   has_one :ih_price
   has_one :stag_price
+  has_one :cigars_of_habanos_price
+  has_one :i_havanas_price
+  has_one :lewis_stagnetto_price
   has_many :coh_bcode
   has_many :stag_bcode
+  has_many :price
   def total_count
     bsize*bcount*multiplier
   end
@@ -24,17 +28,10 @@ class Package < ApplicationRecord
     vitola.vitola
   end
   def minimum_price
-    price = []
-    if coh_price
-      price << coh_price.usd
-    end
-    if ih_price
-      price << ih_price.usd
-    end
-    if stag_price
-      price << stag_price.usd
-    end
-    price.min
+    price.min_by { |x| x.price }
+  end
+  def is_min? (type)
+    minimum_price.type == type
   end
   #def ring_guage
   #  self.

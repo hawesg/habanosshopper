@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908081414) do
+ActiveRecord::Schema.define(version: 20160921072354) do
 
   create_table "coh_bcodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20160908081414) do
     t.index ["vitola_id"], name: "index_packages_on_vitola_id", using: :btree
   end
 
+  create_table "prices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "package_id"
+    t.integer  "price_cents",    default: 0, null: false
+    t.string   "price_currency",             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "type"
+    t.index ["package_id"], name: "index_prices_on_package_id", using: :btree
+  end
+
   create_table "stag_bcodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "stagID"
     t.string   "name"
@@ -103,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160908081414) do
   add_foreign_key "ih_prices", "packages"
   add_foreign_key "package_maps", "packages"
   add_foreign_key "packages", "vitolas"
+  add_foreign_key "prices", "packages"
   add_foreign_key "stag_bcodes", "packages"
   add_foreign_key "stag_bcodes", "stag_prices"
   add_foreign_key "stag_prices", "packages"

@@ -10,13 +10,21 @@ Rails.application.routes.draw do
   get 'vendors/ihavana'
 
   get 'vendors/stagnetto'
-  
+
   get 'vendors/compare'
-    
+
   get 'vendors/' => 'vendors#index'
-  
+
+  get 'prices/cigarsofhabanos' => 'prices#coh'
+
+  get 'prices/ihavanas' => 'prices#ihavana'
+
+  get 'prices/lewisstagnetto' => 'prices#stagnetto'
+
+  get 'prices/' => 'prices#index'
+
   root 'home#index'
-  
+
   resources :coh_bcodes
   resources :stag_bcodes
   resources :stag_prices

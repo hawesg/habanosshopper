@@ -29,33 +29,33 @@
             </tr>
          </thead>
          <tbody>
-            <% @packages.each do |package| %>
+            <% @prices.each do |package| %>
             <tr>
                <td><%= package.marca.titleize %> <i class="fa fa-minus"></i> <a href="#"> <%= package.size.titleize %></a> </td>
                <td><span class="label label-info"><%= human_readable_box_type(package.package_type) %></span></td>
                <td><%= package.inch %>"</td>
                <td><%= package.ring_guage %> <small>rg</small></td>
                <td><%= package.bsize %> <% if package.bcount > 1 %> <i class="fa fa-times"></i> <%= package.bcount %> <% end %> <% if package.multiplier > 1 %> <i class="fa fa-times"></i> <%= package.multiplier %> <% end %></td>
-               <% if package.coh_price %>
-               <td <% if package.coh_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.coh_price.usd %></td>
-               <td <% if package.coh_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.coh_price.cost_per_cigar %></td>
+               <% if package.cigars_of_habanos_price %>
+                  <td class="<%= 'success' if package.is_min? 'CigarsOfHabanosPrice' %>"><%= humanized_money_with_symbol package.cigars_of_habanos_price.price %></td>
+                  <td class="<%= 'success' if package.is_min? 'CigarsOfHabanosPrice' %>"><%= humanized_money_with_symbol package.cigars_of_habanos_price.cost_per_cigar %></td>
                <% else %>
-               <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
-               <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
+                  <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
+                  <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
                <% end %>
-               <% if package.ih_price %>
-               <td <% if package.ih_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.ih_price.usd %></td>
-               <td <% if package.ih_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.ih_price.cost_per_cigar %></td>
+               <% if package.i_havanas_price %>
+                  <td class="<%= 'success' if package.is_min? 'IHavanasPrice' %>"><%= humanized_money_with_symbol package.i_havanas_price.price %></td>
+                  <td class="<%= 'success' if package.is_min? 'IHavanasPrice' %>"><%= humanized_money_with_symbol package.i_havanas_price.cost_per_cigar %></td>
                <% else %>
-               <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
-               <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
+                  <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
+                  <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
                <% end %>
-               <% if package.stag_price %>
-               <td <% if package.stag_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.stag_price.usd %></td>
-               <td <% if package.stag_price.usd == package.minimum_price %> class="success"<%end%>>$<%= package.stag_price.cost_per_cigar %></td>
+               <% if package.lewis_stagnetto_price %>
+                  <td class="<%= 'success' if package.is_min? 'LewisStagnettoPrice' %>"><%= humanized_money_with_symbol package.lewis_stagnetto_price.price %></td>
+                  <td class="<%= 'success' if package.is_min? 'LewisStagnettoPrice' %>"><%= humanized_money_with_symbol package.lewis_stagnetto_price.cost_per_cigar %></td>
                <% else %>
-               <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
-               <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
+                  <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
+                  <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
                <% end %>
             </tr>
             <% end %>

@@ -5,7 +5,7 @@
         <%= link_to root_path, :title => "Home" do %>
 		 	<i class="i i-home icon"></i>
               <span class="font-bold">Home</span>
-		<% end %>  
+		<% end %>
       </li>
       <li>
          <a  class="auto">
@@ -54,26 +54,26 @@
          <span class="font-bold">Vendors</span>
          </a>
          <ul class="nav dk">
-	        <li <% if controller_name == 'vendors' && action_name == 'index' %>class="active"<%end%>>
-		      <%= link_to vendors_path, :title => "Compare Prices" do %>
+	        <li <% if controller_name == 'prices' && action_name == 'index' %>class="active"<%end%>>
+		      <%= link_to prices_path, :title => "Compare Prices" do %>
 			     <i class="i i-dot"></i>
 	             <span>Compare Prices</span>
 			  <% end %>
 		    </li>
-	        <li <% if controller_name == 'vendors' && action_name == 'coh' %>class="active"<%end%>>
-		      <%= link_to vendors_coh_path, :title => "Cigars Of Habanos" do %>
+	        <li <% if controller_name == 'prices' && action_name == 'coh' %>class="active"<%end%>>
+		      <%= link_to prices_cigarsofhabanos_path, :title => "Cigars Of Habanos" do %>
 			     <i class="i i-dot"></i>
 	             <span>Cigars Of Habanos</span>
 			  <% end %>
 		    </li>
-	        <li <% if controller_name == 'vendors' && action_name == 'ihavana' %>class="active"<%end%>>
-		      <%= link_to vendors_ihavana_path, :title => "iHavana" do %>
+	        <li <% if controller_name == 'prices' && action_name == 'ihavana' %>class="active"<%end%>>
+		      <%= link_to prices_ihavanas_path, :title => "iHavana" do %>
 			     <i class="i i-dot"></i>
 	             <span>iHavana</span>
 			  <% end %>
 		    </li>
-	        <li <% if controller_name == 'vendors' && action_name == 'stagnetto' %>class="active"<%end%>>
-		      <%= link_to vendors_stagnetto_path, :title => "Lewis Stagnetto Ltd." do %>
+	        <li <% if controller_name == 'prices' && action_name == 'stagnetto' %>class="active"<%end%>>
+		      <%= link_to prices_lewisstagnetto_path, :title => "Lewis Stagnetto Ltd." do %>
 			     <i class="i i-dot"></i>
 	             <span>Lewis Stagnetto Ltd.</span>
 			  <% end %>
