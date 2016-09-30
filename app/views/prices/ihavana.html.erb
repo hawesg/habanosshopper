@@ -3,11 +3,11 @@
 </div>
 <section class="panel panel-primary">
    <header class="panel-heading">
-     iHavanas
-     <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i>
+      iHavanas
+      <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i>
    </header>
    <div class="table-responsive">
-      <table id="vendors" class="table m-b-none" data-ride="datatables" cellspacing="0" width="100%">
+      <table id="vendorsajax" class="table m-b-none" data-ride="datatables" cellspacing="0" width="100%" data-ajax="ihavanas.json">
          <thead>
             <tr>
                <th><i class="vs vs-smoking-alt"></i></th>
@@ -19,19 +19,6 @@
                <th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
             </tr>
          </thead>
-         <tbody>
-            <% @prices.each do |package| %>
-            <tr>
-               <td><%= package.marca.titleize %> <i class="fa fa-minus"></i> <a href="#"> <%= package.size.titleize %></a></td>
-               <td><span class="label label-info"><%= human_readable_box_type(package.package_type) %></span></td>
-               <td data-filter="<%= package.inch %>"><%= package.inch %>"</td>
-               <td data-filter="<%= package.ring_guage %>"><%= package.ring_guage %> <small>rg</small></td>
-               <td><%= package.bsize %> <% if package.bcount > 1 %> <i class="fa fa-times"></i> <%= package.bcount %> <% end %> <% if package.multiplier > 1 %> <i class="fa fa-times"></i> <%= package.multiplier %> <% end %></td>
-               <td><%= humanized_money_with_symbol package.i_havanas_price.price %></td>
-               <td><%= humanized_money_with_symbol package.i_havanas_price.cost_per_cigar %></td>
-            </tr>
-            <% end %>
-         </tbody>
          <tfoot>
             <tr>
                <th></th>

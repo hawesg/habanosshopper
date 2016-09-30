@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get 'home/index'
 
-  get 'boxcodes/coh'
+  get 'boxcodes/cigarsofhabanos'
 
-  get 'boxcodes/stagnetto'
+  get 'boxcodes/lewisstagnetto'
 
   get 'vendors/coh'
 

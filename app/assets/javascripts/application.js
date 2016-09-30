@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require jquery-ui
+//= require prototypes
 //= require featherlight
 //= require jquery.powertimer
 //= require jquery.timeago
@@ -28,5 +29,3 @@
 //= require bootstrap-sprockets
 //= require backstretch
 //= require_tree .
-
-

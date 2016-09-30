@@ -7,7 +7,7 @@
       <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i>
    </header>
    <div class="table-responsive">
-      <table id="vendors" class="table m-b-none" data-ride="datatables" cellspacing="0" width="98%">
+      <table id="vendorsajax" class="table m-b-none" data-ride="datatables" cellspacing="0" width="98%" data-ajax="../prices.json">
          <thead>
             <tr>
                <th rowspan="2"><i class="vs vs-smoking-alt"></i></th>
@@ -28,38 +28,6 @@
                <th><i class="fa fa-usd"></i>/<i class="vs vs-smoking-alt"></i></th>
             </tr>
          </thead>
-         <tbody>
-            <% @prices.each do |package| %>
-            <tr>
-               <td><%= package.marca.titleize %> <i class="fa fa-minus"></i> <a href="#"> <%= package.size.titleize %></a> </td>
-               <td><span class="label label-info"><%= human_readable_box_type(package.package_type) %></span></td>
-               <td><%= package.inch %>"</td>
-               <td><%= package.ring_guage %> <small>rg</small></td>
-               <td><%= package.bsize %> <% if package.bcount > 1 %> <i class="fa fa-times"></i> <%= package.bcount %> <% end %> <% if package.multiplier > 1 %> <i class="fa fa-times"></i> <%= package.multiplier %> <% end %></td>
-               <% if package.cigars_of_habanos_price %>
-                  <td class="<%= 'success' if package.is_min? 'CigarsOfHabanosPrice' %>"><%= humanized_money_with_symbol package.cigars_of_habanos_price.price %></td>
-                  <td class="<%= 'success' if package.is_min? 'CigarsOfHabanosPrice' %>"><%= humanized_money_with_symbol package.cigars_of_habanos_price.cost_per_cigar %></td>
-               <% else %>
-                  <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
-                  <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
-               <% end %>
-               <% if package.i_havanas_price %>
-                  <td class="<%= 'success' if package.is_min? 'IHavanasPrice' %>"><%= humanized_money_with_symbol package.i_havanas_price.price %></td>
-                  <td class="<%= 'success' if package.is_min? 'IHavanasPrice' %>"><%= humanized_money_with_symbol package.i_havanas_price.cost_per_cigar %></td>
-               <% else %>
-                  <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
-                  <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
-               <% end %>
-               <% if package.lewis_stagnetto_price %>
-                  <td class="<%= 'success' if package.is_min? 'LewisStagnettoPrice' %>"><%= humanized_money_with_symbol package.lewis_stagnetto_price.price %></td>
-                  <td class="<%= 'success' if package.is_min? 'LewisStagnettoPrice' %>"><%= humanized_money_with_symbol package.lewis_stagnetto_price.cost_per_cigar %></td>
-               <% else %>
-                  <td align="center" class="danger"><i class="fa fa-minus" aria-hidden="true"></i></td>
-                  <td class="danger" align="center"><i class="fa fa-minus" aria-hidden="true"></i></td>
-               <% end %>
-            </tr>
-            <% end %>
-         </tbody>
       </table>
    </div>
 </section>

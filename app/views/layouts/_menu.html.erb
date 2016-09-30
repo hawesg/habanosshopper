@@ -28,15 +28,15 @@
          <span class="font-bold">Box Codes</span>
          </a>
          <ul class="nav dk">
-	        <li <% if controller_name == 'boxcodes' && action_name == 'coh' %>class="active"<%end%>>
-		      <%= link_to boxcodes_coh_path, :title => "Cigars of Habanos" do %>
+	        <li <% if controller_name == 'boxcodes' && action_name == 'cigarsofhabanos' %>class="active"<%end%>>
+		      <%= link_to boxcodes_cigarsofhabanos_path, :title => "Cigars of Habanos" do %>
 			     <i class="i i-dot"></i>
 			     <b class="badge bg-primary pull-right"><%= CohBcode.all.count %></b>
 	             <span>Cigars of Habanos</span>
 			  <% end %>
 		    </li>
-	        <li <% if controller_name == 'boxcodes' && action_name == 'stagnetto' %>class="active"<%end%>>
-		      <%= link_to boxcodes_stagnetto_path, :title => "Lewis Stagnetto Ltd." do %>
+	        <li <% if controller_name == 'boxcodes' && action_name == 'lewisstagnetto' %>class="active"<%end%>>
+		      <%= link_to boxcodes_lewisstagnetto_path, :title => "Lewis Stagnetto Ltd." do %>
 			     <i class="i i-dot"></i>
 			     <b class="badge bg-primary pull-right"><%= StagBcode.all.count %></b>
 	             <span>Lewis Stagnetto Ltd.</span>
@@ -44,7 +44,7 @@
 		    </li>
          </ul>
       </li>
-      <li <% if controller_name == 'vendors' %>class="active"<%end%>>
+      <li <% if controller_name == 'prices' %>class="active"<%end%>>
          <a href="#" class="auto">
          <span class="pull-right text-muted">
          <i class="i i-circle-sm-o text"></i>

@@ -1,3 +1,3 @@
 class LewisStagnettoPrice < Price
-    belongs_to :package
+   belongs_to :package
 end

@@ -1,10 +1,19 @@
 class Price < ApplicationRecord
   monetize :price_cents
+  has_one :package
+  #scope :CigarsOfHabanos, -> { where(type: 'CigarsOfHabanosPrice') }
+  #scope :IHavanasPrice, -> { where(type: 'IHavanasPrice') }
+  #scope :LewisStagnettoPrice, -> { where(type: 'LewisStagnettoPrice') }
+  #delegate :CigarsOfHabanos, :IHavanasPrice, :LewisStagnettoPrice, to: :packages
+  #delegate
   def cost_per_cigar
     price/package.total_count
   end
   def is_min?
     package.minimum_price.type == type
+  end
+  def vendor_name
+    type.sub 'Price', ''
   end
 #  def price
 #    Money.new price_cents, price_currency

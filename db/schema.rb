@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921072354) do
+ActiveRecord::Schema.define(version: 20160927084511) do
+
+  create_table "boxcodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "type"
+    t.integer  "package_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "code"
+    t.index ["package_id"], name: "index_boxcodes_on_package_id", using: :btree
+  end
 
   create_table "coh_bcodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -108,6 +118,7 @@ ActiveRecord::Schema.define(version: 20160921072354) do
     t.integer  "backup_id"
   end
 
+  add_foreign_key "boxcodes", "packages"
   add_foreign_key "coh_bcodes", "coh_prices"
   add_foreign_key "coh_bcodes", "packages"
   add_foreign_key "coh_prices", "packages"

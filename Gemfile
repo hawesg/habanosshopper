@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jquery-ui-rails'
 
+gem 'bullet', group: :development
+
 
 gem 'featherlight'
 
